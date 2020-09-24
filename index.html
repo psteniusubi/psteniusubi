@@ -11,7 +11,7 @@
         import { parsed } from "./modules/document-promises.js";
         async function create_repository_menu() {
             await parsed;
-            const repos = ["SimpleSPA", "SimpleAPI", "webauthn-tester", "push-demo"];
+            const repos = ["SimpleSPA", "SimpleAPI", "oidc-tester", "push-demo", "webauthn-tester"];
             const div = document.getElementById("repository_menu");
             for(const i of repos) {
                 const button = document.createElement("button");
@@ -65,6 +65,7 @@
             <div>
                 <ul>
                     <li><a href="/SimpleSPA">JavaScript Single Page Application and Ubisecure SSO</a></li>
+                    <li><a href="/oidc-tester">OpenID Connect Tester</a></li>
                     <li><a href="/push-demo/v2">Push Notifications</a></li>
                     <li><a href="/webauthn-tester">WebAuthn API Tester, Web Crypto</a></li>
                 </ul>
