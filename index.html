@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>psteniusubi.github.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" type="text/css" href="css/ubisecure.css" referrerpolicy="no-referrer" />
+    <style type="text/css">
+    </style>
+    <script async type="module">
+        import { parsed } from "./modules/document-promises.js";
+        async function create_repository_menu() {
+            await parsed;
+            const repos = ["SimpleSPA", "SimpleAPI", "webauthn-tester", "push-demo"];
+            const div = document.getElementById("repository_menu");
+            for(const i of repos) {
+                const button = document.createElement("button");
+                button.setAttribute("href", `https://github.com/psteniusubi/${i}`);
+                button.innerText = i;
+                div.appendChild(button);
+            }
+        }
+        async function set_button_href_handlers() {
+            await parsed;
+            document.querySelectorAll("button[href]").forEach(i => {
+                i.addEventListener("click", e => {
+                    const name = e.target.getAttribute("target") ?? "_blank";
+                    if("_self" === name) {                        
+                        location.assign(e.target.getAttribute("href"));
+                    } else {
+                        window.open(e.target.getAttribute("href"), name); 
+                    }
+                });
+            });
+        }        
+        async function build_page() {
+            await parsed;
+            await create_repository_menu();        
+            await set_button_href_handlers();
+        }
+        build_page();
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <button class="icon-home" href="/" target="_self">Home</button>
+            <div>
+                <button class="icon-arrow-drop-down">Repositories</button>
+                <div id="repository_menu">
+                    <button href="https://github.com/psteniusubi?tab=repositories">All Repositories</button>
+                </div>
+            </div>
+        </nav>
+        <nav>
+            <button href="https://ubisecure.com" class="ubisecure-standard-logo-h-reverse">&nbsp;</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="outline">
+            <h1>psteniusubi.github.io</h1>
+            <div>
+                <ul>
+                    <li><a href="/SimpleSPA">JavaScript Single Page Application and Ubisecure SSO</a></li>
+                    <li><a href="/push-demo">Push Notifications</a></li>
+                    <li><a href="/webauthn-tester">WebAuthn API Tester, Web Crypto</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
