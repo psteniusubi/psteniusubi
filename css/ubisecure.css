@@ -1,0 +1,282 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Raleway:wght@700");
+@import url("https://fonts.googleapis.com/css?family=Material+Icons");
+@import url("ubisecure-standard-logo.css");
+
+/* variables */
+
+:root {
+    --font-size: 11pt;
+
+    --ubisecure-primary-color: white;
+    --ubisecure-primary-background-color: #28a7f0;
+
+    --ubisecure-accent-one: #ff541e;
+    --ubisecure-accent-two: #52CAB8;
+
+    --ubisecure-standard-blue: #0c73ac;
+    --ubisecure-image-overlay-blue: #0367a1;
+    --ubisecure-dark-background-blue: #152435;
+    --ubisecure-blue: #083aae;
+
+    --ubisecure-light-gray: #e6e6e6;
+    --ubisecure-mid-gray: #b2b2b2;
+    --ubisecure-dark-gray: #383838;
+    --ubisecure-black: #000000;
+
+    --ubisecure-body-color: var(--ubisecure-black);
+    --ubisecure-body-background-color: white;
+    --ubisecure-header-color: white;
+    --ubisecure-header-background-color: var(--ubisecure-primary-background-color);
+    --ubisecure-menu-color: var(--ubisecure-black);
+    --ubisecure-menu-background-color: var(--ubisecure-light-gray);
+    --ubisecure-outline-color: var(--ubisecure-mid-gray);
+
+    --ubisecure-raleway-font: "Raleway", sans-serif;
+    --ubisecure-open-sans-font: "Open Sans", sans-serif;    
+}
+
+/* reset */
+
+:root, :link, :visited, * {
+    box-sizing: border-box;
+    text-decoration: unset;
+    margin: unset; 
+    padding: unset;
+    border: unset;
+    border-radius: unset;
+    border-spacing: unset;
+    border-collapse: unset;
+    outline: unset;
+    cursor: unset;
+    font: unset;
+    color: unset;
+}
+
+/* global */
+
+:root {
+    font-family: var(--ubisecure-open-sans-font);
+    font-size: var(--font-size);     
+}
+
+/* body grid */
+
+body, section.body {
+    display: grid;
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+}
+
+body > header, section.body > header {
+    grid-area: header;
+}
+
+body > main, section.body > main {
+    grid-area: main;
+}
+
+body > footer, section.body > footer {
+    grid-area: footer;
+}
+
+/* header and footer */
+
+header, footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 2rem;
+    color: var(--ubisecure-header-color);
+    background-color: var(--ubisecure-header-background-color);
+}
+
+/* header navigation menu */
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: stretch;
+}
+
+nav button {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 0.5rem;
+    height: 2rem;
+    color: inherit;
+    background-color: inherit;
+}
+
+nav button:hover, nav button:focus-within {
+    outline: 2px solid var(--ubisecure-outline-color);
+    outline-offset: -2px;
+    color: var(--ubisecure-menu-color);
+    background-color: var(--ubisecure-menu-background-color);
+    cursor: pointer;
+}
+
+nav > div > div {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    color: var(--ubisecure-header-color);
+    background-color: var(--ubisecure-header-background-color);
+}
+
+nav > :hover > div, nav > :focus-within > div {
+    display: flex;    
+    flex-direction: column;
+}
+
+/* body sections */ 
+
+section {
+    margin: 1rem 0.5rem;
+}
+section > * {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+section:not(.scroll) > :not(table):last-child {
+    margin-bottom: 1rem;
+}
+section.outline > * {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+section.outline {
+    border: 1px solid var(--ubisecure-outline-color);
+    box-shadow: 0.25rem 0.25rem 0.5rem -0.25rem var(--ubisecure-mid-gray);
+}
+
+/* table */
+
+section > table {
+    width: 100%;
+    margin: unset;
+    text-align: left;
+    border: 1px solid var(--ubisecure-outline-color);
+    box-shadow: 0.25rem 0.25rem 0.5rem -0.25rem var(--ubisecure-mid-gray);
+}
+
+section > table > thead, section > table > tbody > tr:nth-child(even) {
+    background-color: var(--ubisecure-light-gray)
+}
+section > table > thead {
+    font-weight: bold;
+}
+section > table > thead > tr > th, section > table > tbody > tr > td {
+    padding: 0.25rem 0.5rem;
+}
+section > table.hover > tbody > tr:hover {
+    background-color: var(--ubisecure-mid-gray);
+    cursor: pointer;
+}
+
+/* table scrolling */
+
+section.scroll {
+    overflow-y: scroll;
+    max-height: 33vh;
+    border: 1px solid var(--ubisecure-outline-color);
+    box-shadow: 0.25rem 0.25rem 0.5rem -0.25rem var(--ubisecure-mid-gray);
+}
+section.scroll > table {
+    border: unset;
+}
+
+/* form */
+
+section > form > * {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    margin: 0.5rem 0;
+    gap: 0.5rem;
+}
+
+section > form input, section > form textarea, section > form select {
+    outline: 1px solid var(--ubisecure-outline-color);
+    outline-offset: -1px;
+    min-width: 0;
+    height: 1.75rem;
+    padding: 0 0.5rem;
+}
+section > form button {
+    padding: 0 0.5rem;
+    height: 1.75rem;
+}
+section > form textarea { 
+    padding-top: 0.2rem;
+    resize: vertical;
+}
+
+section > form *:focus, section > form input:hover, section > form textarea:hover, section > form select:hover, section > form button:hover {
+    outline: 2px solid var(--ubisecure-outline-color);
+    outline-offset: -2px;
+    cursor: pointer;
+}
+
+section > form label {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* form fields */
+
+.flex1 { flex:1; }
+.flex2 { flex:2; }
+.flex3 { flex:3; }
+.flex4 { flex:4; }
+.flex5 { flex:5; }
+.flex6 { flex:6; }
+
+/* standard styles */
+
+h1 { font-size: calc(var(--font-size) * 2.5); }
+h2 { font-size: calc(var(--font-size) * 2.0); }
+h3 { font-size: calc(var(--font-size) * 1.75); }
+h4 { font-size: calc(var(--font-size) * 1.5); }
+h5 { font-size: calc(var(--font-size) * 1.25); }
+h6 { font-size: calc(var(--font-size) * 1.0); }
+
+ul, ol {
+    padding-left: 1rem;
+    margin-left: 1rem;
+}
+dl > dd, dl > dl {
+    padding-left: 1rem;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* icons */
+
+.icon-home::before {
+    height: 1em;
+    content: "home\0000A0";
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-size: 1em;
+}
+
+.icon-arrow-drop-down::after {
+    height: 1em;
+    content: "\0000A0arrow_drop_down";
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-size: 1em;
+}
