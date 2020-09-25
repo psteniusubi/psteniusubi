@@ -1,3 +1,7 @@
+//
+// origin https://github.com/jonathantneal/document-promises
+//
+
 // thenfied document ready states
 const thenify = (type, readyState) => new Promise(resolve => {
 	const listener = () => {
