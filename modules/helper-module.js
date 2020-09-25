@@ -1,3 +1,5 @@
+import { parsed } from "./document-promises.js";
+
 export async function create_repository_menu() {
     await parsed;
     const repos = ["SimpleSPA", "SimpleAPI", "oidc-tester", "push-demo", "webauthn-tester"];
