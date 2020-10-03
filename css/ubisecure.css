@@ -116,12 +116,16 @@ nav button {
     background-color: inherit;
 }
 
-nav button:hover, nav button:focus-within {
+nav button:not(.label):hover, nav button:not(.label):focus-within {
     outline: 2px solid var(--ubisecure-outline-color);
     outline-offset: -2px;
     color: var(--ubisecure-menu-color);
     background-color: var(--ubisecure-menu-background-color);
     cursor: pointer;
+}
+
+nav button.label {
+    user-select: all;
 }
 
 nav > div > div {
