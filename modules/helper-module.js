@@ -14,13 +14,30 @@ export async function create_repository_menu() {
 export async function set_button_href_handlers() {
     await parsed;
     document.querySelectorAll("button[href]").forEach(i => {
+        if (!i.hasAttribute("title")) {
+            const url = new URL(i.getAttribute("href"), location.href);
+            i.setAttribute("title", url);
+        }
         i.addEventListener("click", e => {
-            const name = e.target.getAttribute("target") || "_blank";
-            if ("_self" === name) {
-                location.assign(e.target.getAttribute("href"));
+            const button = e.currentTarget;
+            const target = button.getAttribute("target") || "_blank";
+            if ("_self" === target) {
+                location.assign(button.getAttribute("href"));
             } else {
-                window.open(e.target.getAttribute("href"), name);
+                window.open(button.getAttribute("href"), target);
             }
         });
+        // i.addEventListener("mouseenter", e => {
+        //     const button = e.currentTarget;
+        //     const url = new URL(i.getAttribute("href"), location.href);
+        //     console.log("enter " + url);
+        //     window.status = url;
+        // });
+        // i.addEventListener("mouseleave", e => {
+        //     const button = e.currentTarget;
+        //     const url = new URL(i.getAttribute("href"), location.href);
+        //     console.log("leave " + url);
+        //     window.status = null;
+        // });
     });
 }        

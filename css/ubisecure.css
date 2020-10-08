@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:wght@700");
 @import url("https://fonts.googleapis.com/css?family=Material+Icons");
 @import url("ubisecure-standard-logo.css");
+@import url("reset.css");
 
 /* variables */
 
@@ -31,33 +32,19 @@
     --ubisecure-menu-color: var(--ubisecure-black);
     --ubisecure-menu-background-color: var(--ubisecure-light-gray);
     --ubisecure-outline-color: var(--ubisecure-mid-gray);
+    --ubisecure-button-background-color: var(--ubisecure-light-gray);
 
     --ubisecure-raleway-font: "Raleway", sans-serif;
     --ubisecure-open-sans-font: "Open Sans", sans-serif;    
 }
 
-/* reset */
-
-:root, :link, :visited, * {
-    box-sizing: border-box;
-    text-decoration: unset;
-    margin: unset; 
-    padding: unset;
-    border: unset;
-    border-radius: unset;
-    border-spacing: unset;
-    border-collapse: unset;
-    outline: unset;
-    cursor: unset;
-    font: unset;
-    color: unset;
-}
 
 /* global */
 
 :root {
     font-family: var(--ubisecure-open-sans-font);
-    font-size: var(--font-size);     
+    font-size: var(--font-size);
+    line-height: 1.25em;
 }
 
 /* body grid */
@@ -65,11 +52,11 @@
 body, section.body {
     display: grid;
     grid-template-areas:
-    "header"
-    "main"
-    "footer";
+    "header-left header header-right"
+    "left main right"
+    "footer-left footer footer-right";
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr auto;
 }
 
 body > header, section.body > header {
@@ -90,8 +77,6 @@ header, footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stretch;
-    height: 2rem;
     color: var(--ubisecure-header-color);
     background-color: var(--ubisecure-header-background-color);
 }
@@ -101,17 +86,13 @@ header, footer {
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: start;
-    align-items: stretch;
 }
 
 nav button {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    align-items: center;
     padding: 0.5rem;
-    height: 2rem;
     color: inherit;
     background-color: inherit;
 }
@@ -122,6 +103,10 @@ nav button:not(.label):hover, nav button:not(.label):focus-within {
     color: var(--ubisecure-menu-color);
     background-color: var(--ubisecure-menu-background-color);
     cursor: pointer;
+}
+
+nav button:not(.label):active {
+    background-color: var(--ubisecure-outline-color);
 }
 
 nav button.label {
@@ -136,7 +121,7 @@ nav > div > div {
     background-color: var(--ubisecure-header-background-color);
 }
 
-nav > :hover > div, nav > :focus-within > div {
+nav > div:hover > div, nav > div:focus-within > div {
     display: flex;    
     flex-direction: column;
 }
@@ -168,6 +153,7 @@ section > table {
     width: 100%;
     margin: unset;
     text-align: left;
+    table-layout: fixed;
     border: 1px solid var(--ubisecure-outline-color);
     box-shadow: 0.25rem 0.25rem 0.5rem -0.25rem var(--ubisecure-mid-gray);
 }
@@ -181,9 +167,18 @@ section > table > thead {
 section > table > thead > tr > th, section > table > tbody > tr > td {
     padding: 0.25rem 0.5rem;
 }
+
+/* table hovering */
+
 section > table.hover > tbody > tr:hover {
     background-color: var(--ubisecure-mid-gray);
     cursor: pointer;
+}
+
+/* table row selected */
+
+table > tbody > tr.selected:nth-child(n) {
+    background-color: var(--ubisecure-mid-gray);
 }
 
 /* table scrolling */
@@ -220,6 +215,9 @@ section > form button {
     padding: 0 0.5rem;
     height: 1.75rem;
 }
+section > form button:active {
+    background-color: var(--ubisecure-outline-color);
+}
 section > form textarea { 
     padding-top: 0.2rem;
     resize: vertical;
@@ -236,7 +234,7 @@ section > form label {
     white-space: nowrap;
 }
 
-/* form fields */
+/* form columns */
 
 .flex1 { flex:1; }
 .flex2 { flex:2; }
@@ -247,12 +245,34 @@ section > form label {
 
 /* standard styles */
 
-h1 { font-size: calc(var(--font-size) * 2.5); }
-h2 { font-size: calc(var(--font-size) * 2.0); }
-h3 { font-size: calc(var(--font-size) * 1.75); }
-h4 { font-size: calc(var(--font-size) * 1.5); }
-h5 { font-size: calc(var(--font-size) * 1.25); }
-h6 { font-size: calc(var(--font-size) * 1.0); }
+h1 { 
+    font-size: calc(var(--font-size) * 2.5); 
+    line-height: 1.25em;
+}
+h2 { 
+    font-size: calc(var(--font-size) * 2.0); 
+    line-height: 1.25em;
+}
+h3 { 
+    font-size: calc(var(--font-size) * 1.75); 
+    line-height: 1.25em;
+}
+h4 { 
+    font-size: calc(var(--font-size) * 1.5); 
+    line-height: 1.25em;
+}
+h5 { 
+    font-size: calc(var(--font-size) * 1.25); 
+    line-height: 1.25em;
+}
+h6 { 
+    font-size: calc(var(--font-size) * 1.0); 
+    line-height: 1.25em;
+}
+
+button { 
+    background-color: var(--ubisecure-button-background-color); 
+}
 
 ul, ol {
     padding-left: 1rem;
@@ -267,20 +287,28 @@ a:hover, a:focus {
     cursor: pointer;
 }
 
-/* icons */
+/* hidden */
 
-.icon-home::before {
-    height: 1em;
-    content: "home\0000A0";
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-size: 1em;
+.hidden {
+    display: none;
 }
 
-.icon-arrow-drop-down::after {
-    height: 1em;
-    content: "\0000A0arrow_drop_down";
+/* icons */
+
+icon {
+    display: inline;
     font-family: 'Material Icons';
-    font-weight: normal;
-    font-size: 1em;
+    vertical-align: bottom;
+}
+
+icon.home::after {
+    content: "home";
+}
+
+icon.arrow-drop-down::after {
+    content: "arrow_drop_down";
+}
+
+icon.content-copy::after {
+    content: "content_copy";
 }
