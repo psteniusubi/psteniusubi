@@ -1,6 +1,6 @@
 .ubisecure-standard-logo-h-reverse {
     width: 7rem !important;
-    background-image: url("../content/ubisecure-standard-logo-h-reverse.svg");
+    background-image: url("../images/ubisecure-standard-logo-h-reverse.svg");
     background-repeat: no-repeat;
     background-size: 6rem auto;
     background-position: center;
@@ -9,5 +9,5 @@
 
 .ubisecure-standard-logo-h-reverse:hover,
 .ubisecure-standard-logo-h-reverse:focus {
-    background-image: url("../content/ubisecure-standard-logo-h.svg");
+    background-image: url("../images/ubisecure-standard-logo-h.svg");
 }
