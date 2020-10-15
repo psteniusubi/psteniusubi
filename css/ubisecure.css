@@ -9,6 +9,8 @@
 :root {
     --font-size: 11pt;
 
+    --grid-main-area-width: 1fr;
+
     --ubisecure-primary-color: white;
     --ubisecure-primary-background-color: #28a7f0;
 
@@ -56,7 +58,7 @@ body, section.body {
     "left main right"
     "footer-left footer footer-right";
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto var(--grid-main-area-width) auto;
 }
 
 body > header, section.body > header {
@@ -166,6 +168,8 @@ section > table > thead {
 }
 section > table > thead > tr > th, section > table > tbody > tr > td {
     padding: 0.25rem 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* table hovering */
@@ -212,6 +216,8 @@ section > form input, section > form textarea, section > form select {
     padding: 0 0.5rem;
 }
 section > form button {
+    display: flex;
+    align-items: center;
     padding: 0 0.5rem;
     height: 1.75rem;
 }
@@ -230,6 +236,10 @@ section > form *:focus, section > form input:hover, section > form textarea:hove
 }
 
 section > form label {
+    /* display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start; */
     overflow: hidden;
     white-space: nowrap;
 }

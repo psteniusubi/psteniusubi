@@ -11,6 +11,7 @@ export async function create_repository_menu() {
         div.appendChild(button);
     }
 }
+
 export async function set_button_href_handlers() {
     await parsed;
     document.querySelectorAll("button[href]").forEach(i => {
@@ -20,7 +21,12 @@ export async function set_button_href_handlers() {
         }
         i.addEventListener("click", e => {
             const button = e.currentTarget;
-            const target = button.getAttribute("target") || "_blank";
+            let target = button.getAttribute("target") || "_blank";
+            if ("_self" === target) {
+                if (e.ctrlKey) {
+                    target = "_blank";
+                }
+            }
             if ("_self" === target) {
                 location.assign(button.getAttribute("href"));
             } else {
@@ -40,4 +46,20 @@ export async function set_button_href_handlers() {
         //     window.status = null;
         // });
     });
-}        
+}
+
+// document.querySelectorAll("table.select").forEach(set_table_select_handlers);
+
+function tr_click(e) {
+    const tr = e.target
+        .closest("table.select > tbody > tr");
+    if (tr === null) return;
+    tr.closest("tbody")
+        .querySelectorAll("tr.selected")
+        .forEach(i => i.classList.remove("selected"));
+    tr.classList.add("selected");
+}
+
+export function set_table_select_handlers(table) {
+    table.addEventListener("click", tr_click);
+}
