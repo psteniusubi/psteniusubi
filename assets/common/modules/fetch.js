@@ -6,16 +6,24 @@
         return await window.fetch(request);
     }
     async invoke(request) {
-        const response = await this.fetch(request);
+        let response;
+        try {
+            response = await this.fetch(request);
+        } catch (e) {
+            throw fetch_error(request, e);
+        }
         if (!response.ok) throw http_error(request, response);
         return response;
+    }
+    async invoke_json(request) {
+        const response = await this.invoke(request);
+        return await http_to_json(response);
     }
     async get(uri) {
         const request = this.create_request(uri, {
             method: "GET"
         });
-        const response = await this.invoke(request);
-        return await http_to_json(response);
+        return await this.invoke_json(request);
     }
     async get_html(uri) {
         const request = this.create_request(uri, {
@@ -32,8 +40,7 @@
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: body
         });
-        const response = await this.invoke(request);
-        return await http_to_json(response);
+        return await this.invoke_json(request);
     }
     async post_json(uri, body) {
         const request = this.create_request(uri, {
@@ -41,8 +48,7 @@
             headers: { "Content-Type": "application/json" },
             body: body
         });
-        const response = await this.invoke(request);
-        return await http_to_json(response);
+        return await this.invoke_json(request);
     }
     async put(uri, body) {
         const request = this.create_request(uri, {
@@ -50,8 +56,7 @@
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: body
         });
-        const response = await this.invoke(request);
-        return await http_to_json(response);
+        return await this.invoke_json(request);
     }
     async put_json(uri, body) {
         const request = this.create_request(uri, {
@@ -59,15 +64,13 @@
             headers: { "Content-Type": "application/json" },
             body: body
         });
-        const response = await this.invoke(request);
-        return await http_to_json(response);
+        return await this.invoke_json(request);
     }
     async delete(uri) {
         const request = this.create_request(uri, {
             method: "DELETE"
         });
-        const response = await this.invoke(request);
-        return await http_to_json(response);
+        return await this.invoke_json(request);
     }
 }
 
@@ -76,6 +79,12 @@ const http_error = (request, response) => ({
     "http_request": request,
     "http_status": response.status,
     "http_response": response
+});
+
+const fetch_error = (request, error) => ({
+    "error": "fetch_error",
+    "http_request": request,
+    "fetch_error": error,
 });
 
 const http_to_json = async (response) => (response.status !== 204) ? await response.json() : null;
